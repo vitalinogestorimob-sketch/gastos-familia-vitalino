@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gastos Família Vitalino</title>
+<style>
+:root{--ink:#17202a;--muted:#64748b;--gold:#b58a3b;--line:#e5e7eb;--bg:#f4f6f8;--green:#16794b;--red:#b42318}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--ink);padding:24px}
+.wrap{max-width:1100px;margin:auto}
+header{background:#15191f;color:white;padding:28px;border-radius:16px;margin-bottom:20px;border-bottom:5px solid var(--gold)}
+header h1{margin:0 0 8px;font-size:clamp(24px,4vw,34px);letter-spacing:.4px}
+header p{margin:0;color:#d8dde3}
+.month{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:18px}
+.month label{font-size:13px;color:#d8dde3}
+input,select{font:inherit}
+.month input{padding:9px;border-radius:8px;border:1px solid #555;background:#fff;color:#111}
+.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}
+.panel{background:white;border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:0 3px 12px #17202a0a}
+h2{font-size:19px;margin:0 0 16px}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;font-size:12px;color:var(--muted);font-weight:700;padding:9px 6px;border-bottom:1px solid var(--line)}
+td{padding:7px 6px;border-bottom:1px solid #f0f1f3}
+td input{width:100%;min-width:0;padding:9px;border:1px solid #d7dce2;border-radius:7px}
+td:first-child{width:48%}
+td:last-child{width:40%}
+.money{text-align:right}
+.total-line{display:flex;justify-content:space-between;gap:12px;padding:13px 2px;border-bottom:1px solid var(--line)}
+.total-line strong{font-variant-numeric:tabular-nums}
+.summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.metric{background:#f7f8fa;border-radius:10px;padding:14px}
+.metric span{display:block;color:var(--muted);font-size:12px;margin-bottom:7px}
+.metric strong{font-size:20px;font-variant-numeric:tabular-nums}
+.balance{margin-top:12px;padding:17px;border-radius:11px;background:#f7f8fa;border-left:5px solid var(--gold)}
+.balance span{display:block;color:var(--muted);font-size:13px;margin-bottom:6px}
+.balance strong{font-size:25px;font-variant-numeric:tabular-nums}
+.income-row{display:grid;grid-template-columns:1fr 145px;gap:8px;margin-bottom:8px}
+.income-row input{padding:10px;border:1px solid #d7dce2;border-radius:7px;width:100%}
+button{border:0;border-radius:8px;padding:10px 14px;font-weight:700;cursor:pointer}
+.add{background:#edf1f5;color:#263342;margin-top:8px}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.primary{background:#17202a;color:white}
+.secondary{background:#e9edf1;color:#17202a}
+.plan{margin-top:18px}
+.plan ol{padding-left:22px;margin-bottom:0}
+.plan li{padding:7px 0;line-height:1.45}
+.tip{font-size:13px;color:var(--muted);line-height:1.5;margin-top:12px}
+footer{text-align:center;color:var(--muted);font-size:12px;margin:18px 0}
+@media(max-width:760px){body{padding:12px}.grid{grid-template-columns:1fr}.panel{padding:15px}.summary{grid-template-columns:1fr 1fr}}
+@media print{body{background:white;padding:0}.panel,header{box-shadow:none;break-inside:avoid}.actions,.add{display:none}header{background:#15191f!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>GASTOS FAMÍLIA VITALINO</h1>
+  <p>Controle mensal de despesas, receitas e planejamento para economizar.</p>
+  <div class="month"><label for="mes">Mês de referência</label><input id="mes" type="month"></div>
+</header>
+
+<div class="grid">
+<section class="panel">
+<h2>Despesas do mês</h2>
+<table>
+<thead><tr><th>Descrição</th><th class="money">Valor (R$)</th></tr></thead>
+<tbody id="despesas">
+<tr><td>Escola</td><td><input class="expense money" type="number" min="0" step="0.01" placeholder="0,00"></td></tr>
+<tr><td>Carro</td><td><input class="expense money" type="number" min="0" step="0.01" placeholder="0,00"></td></tr>
+<tr><td>Casa</td><td><input class="expense money" type="number" min="0" step="0.01" placeholder="0,00"></td></tr>
+<tr><td>Internet</td><td><input class="expense money" type="number" min="0" step="0.01" placeholder="0,00"></td></tr>
+<tr><td>Telefone</td><td><input class="expense money" type="number" min="0" step="0.01" placeholder="0,00"></td></tr>
+<tr><td>Água</td><td><input class="expense money" type="number" min="0" step="0.01" placeholder="0,00"></td></tr>
+<tr><td>Luz</td><td><input class="expense money" type="number" min="0" step="0.01" placeholder="0,00"></td></tr>
+<tr><td>Comida</td><td><input class="expense money" type="number" min="0" step="0.01" placeholder="0,00"></td></tr>
+<tr><td>Lucia Casa</td><td><input class="expense money" type="number" min="0" step="0.01" placeholder="0,00"></td></tr>
+<tr><td>Site</td><td><input class="expense money" type="number" min="0" step="0.01" placeholder="0,00"></td></tr>
+<tr><td>Contabilidade</td><td><input class="expense money" type="number" min="0" step="0.01" placeholder="0,00"></td></tr>
+<tr><td><input aria-label="Nome do item extra 1" placeholder="Item extra 1"></td><td><input class="expense money" type="number" min="0" step="0.01" placeholder="0,00"></td></tr>
+<tr><td><input aria-label="Nome do item extra 2" placeholder="Item extra 2"></td><td><input class="expense money" type="number" min="0" step="0.01" placeholder="0,00"></td></tr>
+<tr><td><input aria-label="Nome do item extra 3" placeholder="Item extra 3"></td><td><input class="expense money" type="number" min="0" step="0.01" placeholder="0,00"></td></tr>
+<tr><td><input aria-label="Nome do item extra 4" placeholder="Item extra 4"></td><td><input class="expense money" type="number" min="0" step="0.01" placeholder="0,00"></td></tr>
+<tr><td><input aria-label="Nome do item extra 5" placeholder="Item extra 5"></td><td><input class="expense money" type="number" min="0" step="0.01" placeholder="0,00"></td></tr>
+</tbody>
+</table>
+<div class="total-line"><span><strong>Total de despesas</strong></span><strong id="totalDespesas">R$ 0,00</strong></div>
+</section>
+
+<div>
+<section class="panel">
+<h2>Recebimentos do mês</h2>
+<div id="receitas">
+  <div class="income-row"><input type="text" placeholder="Origem do recebimento (ex.: salário)"><input class="income money" type="number" min="0" step="0.01" placeholder="R$ 0,00"></div>
+</div>
+<button class="add" type="button" id="addIncome">+ Adicionar recebimento</button>
+<div class="total-line" style="margin-top:12px"><span><strong>Total recebido</strong></span><strong id="totalReceitas">R$ 0,00</strong></div>
+</section>
+
+<section class="panel" style="margin-top:18px">
+<h2>Resultado do mês</h2>
+<div class="summary">
+  <div class="metric"><span>Total de gastos</span><strong id="resGastos">R$ 0,00</strong></div>
+  <div class="metric"><span>Total recebido</span><strong id="resRecebido">R$ 0,00</strong></div>
+</div>
+<div class="balance">
+  <span>Gastos menos recebimentos</span>
+  <strong id="saldo">R$ 0,00</strong>
+  <div id="situacao" class="tip">Preencha os valores para ver o resultado.</div>
+</div>
+<p class="tip">Saldo positivo significa que os gastos superaram os recebimentos. Saldo negativo significa que sobrou dinheiro no mês.</p>
+</section>
+</div>
+</div>
+
+<section class="panel plan">
+<h2>Plano de ação — Economia da Família Vitalino</h2>
+<ol>
+<li><strong>Registrar tudo:</strong> lançar despesas e recebimentos durante o mês, inclusive pequenos gastos e compras por impulso.</li>
+<li><strong>Separar o essencial:</strong> priorizar moradia, escola, alimentação, contas básicas e transporte. Identificar o que pode ser reduzido ou renegociado.</li>
+<li><strong>Definir limites:</strong> estabelecer um teto semanal para mercado, lazer e gastos variáveis, acompanhando o consumo toda semana.</li>
+<li><strong>Reduzir desperdícios:</strong> planejar refeições e compras, comparar preços, evitar desperdício de água e energia e revisar assinaturas e serviços.</li>
+<li><strong>Guardar primeiro:</strong> separar uma meta inicial de 5% da renda mensal; se não for possível, começar com um valor pequeno e aumentar gradualmente.</li>
+<li><strong>Reunião familiar:</strong> reservar 15 minutos por semana para conferir os números, combinar ajustes e acompanhar a meta de economia.</li>
+<li><strong>Fechamento mensal:</strong> comparar o resultado com o mês anterior, reconhecer avanços e escolher uma despesa para reduzir no mês seguinte.</li>
+</ol>
+<p class="tip"><strong>Meta inicial sugerida:</strong> terminar o mês com pelo menos 5% dos recebimentos guardados, ajustando a meta à realidade da família e priorizando contas essenciais e dívidas em atraso.</p>
+</section>
+
+<div class="actions">
+<button class="primary" type="button" onclick="window.print()">Imprimir / Salvar em PDF</button>
+<button class="secondary" type="button" id="save">Salvar neste navegador</button>
+<button class="secondary" type="button" id="clear">Limpar valores</button>
+</div>
+<p class="tip">Os dados ficam salvos neste navegador quando você clicar em “Salvar neste navegador”. Para manter um histórico, salve uma cópia em PDF ao fechar cada mês.</p>
+<footer>Gastos Família Vitalino · Controle financeiro familiar</footer>
+</div>
+<script>
+const brl = n => (Number(n)||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const expenseInputs = () => [...document.querySelectorAll('.expense')];
+const incomeInputs = () => [...document.querySelectorAll('.income')];
+function update(){
+ const gastos=expenseInputs().reduce((s,e)=>s+(parseFloat(e.value)||0),0);
+ const receitas=incomeInputs().reduce((s,e)=>s+(parseFloat(e.value)||0),0);
+ const saldo=gastos-receitas;
+ document.getElementById('totalDespesas').textContent=brl(gastos);
+ document.getElementById('totalReceitas').textContent=brl(receitas);
+ document.getElementById('resGastos').textContent=brl(gastos);
+ document.getElementById('resRecebido').textContent=brl(receitas);
+ document.getElementById('saldo').textContent=brl(saldo);
+ const situacao=document.getElementById('situacao');
+ if(gastos===0 && receitas===0){situacao.textContent='Preencha os valores para ver o resultado.';situacao.style.color='';}
+ else if(saldo>0){situacao.textContent='Atenção: os gastos estão acima dos recebimentos.';situacao.style.color='var(--red)';}
+ else if(saldo<0){situacao.textContent='Ótimo: sobraram '+brl(Math.abs(saldo))+' neste mês.';situacao.style.color='var(--green)';}
+ else{situacao.textContent='Gastos e recebimentos estão equilibrados.';situacao.style.color='';}
+}
+document.addEventListener('input',e=>{if(e.target.matches('.expense,.income'))update();});
+document.getElementById('addIncome').addEventListener('click',()=>{
+ const row=document.createElement('div');row.className='income-row';
+ row.innerHTML='<input type="text" placeholder="Origem do recebimento"><input class="income money" type="number" min="0" step="0.01" placeholder="R$ 0,00">';
+ document.getElementById('receitas').appendChild(row);
+});
+function collect(){
+ return {mes:document.getElementById('mes').value,
+ expenses:expenseInputs().map(e=>e.value),
+ labels:[...document.querySelectorAll('#despesas tr td:first-child')].map(td=>td.querySelector('input')?td.querySelector('input').value:td.textContent),
+ incomes:[...document.querySelectorAll('#receitas .income-row')].map(r=>[r.children[0].value,r.children[1].value])};
+}
+document.getElementById('save').addEventListener('click',()=>{
+ try{localStorage.setItem('gastosFamiliaVitalino',JSON.stringify(collect()));alert('Dados salvos neste navegador.');}
+ catch(e){alert('Não foi possível salvar neste navegador.');}
+});
+function load(){
+ try{
+ const d=JSON.parse(localStorage.getItem('gastosFamiliaVitalino')||'null');if(!d)return;
+ document.getElementById('mes').value=d.mes||'';
+ expenseInputs().forEach((e,i)=>e.value=(d.expenses||[])[i]||'');
+ (d.labels||[]).forEach((v,i)=>{const input=document.querySelectorAll('#despesas tr td:first-child input')[i];if(input)input.value=v;});
+ document.getElementById('receitas').innerHTML='';
+ (d.incomes&&d.incomes.length?d.incomes:[['','']]).forEach(pair=>{
+ const row=document.createElement('div');row.className='income-row';
+ const desc=document.createElement('input');desc.type='text';desc.placeholder='Origem do recebimento (ex.: salário)';desc.value=pair[0]||'';
+ const val=document.createElement('input');val.className='income money';val.type='number';val.min='0';val.step='0.01';val.placeholder='R$ 0,00';val.value=pair[1]||'';
+ row.append(desc,val);document.getElementById('receitas').appendChild(row);
+ });
+ }catch(e){}
+ update();
+}
+document.getElementById('clear').addEventListener('click',()=>{
+ if(!confirm('Deseja limpar todos os valores preenchidos?'))return;
+ expenseInputs().forEach(e=>e.value='');
+ document.querySelectorAll('#despesas tr td:first-child input').forEach(e=>e.value='');
+ document.getElementById('receitas').innerHTML='<div class="income-row"><input type="text" placeholder="Origem do recebimento (ex.: salário)"><input class="income money" type="number" min="0" step="0.01" placeholder="R$ 0,00"></div>';
+ document.getElementById('mes').value='';localStorage.removeItem('gastosFamiliaVitalino');update();
+});
+load();
+</script>
+</body>
+</html>
